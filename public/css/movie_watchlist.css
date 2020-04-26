@@ -1,3 +1,8 @@
+.header {
+  padding: 30px;
+  text-align: center;
+}
+
 .navbar {
   width: 100%;
   overflow: hidden;
@@ -11,4 +16,27 @@
   font-size: 17px;
   width: 25%;
   text-align: center;
+}
+
+.watchlist_box {
+  width: 80%;
+  margin: 30px 15%;
+}
+
+.watchlist_title {
+  font-size: 20px;
+  text-decoration: none;
+  color: black;
+}
+
+.watchlist_title:hover {
+  text-decoration: none;
+  color: black;
+}
+
+.watchlist_movie_poster {
+  width: 200px;
+  height: 280px;
+  margin-right: 20px;
+  margin-top: 10px;
 }

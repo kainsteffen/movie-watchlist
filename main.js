@@ -30,14 +30,25 @@ const port = 3000,
    utils.getFile("public/js/movieWatchlist.js", res);
   });
 
+  router.get("/poster_avengers_endgame.jpg", (req, res) => {
+   res.writeHead(httpStatus.OK, contentTypes.png);
+   utils.getFile("public/images/poster_avengers_endgame.jpg", res);
+  });
+
+  router.get("/poster_fightclub.jpg", (req, res) => {
+   res.writeHead(httpStatus.OK, contentTypes.png);
+   utils.getFile("public/images/poster_fightclub.jpg", res);
+  });
+
+  router.get("/poster_joker.jpg", (req, res) => {
+   res.writeHead(httpStatus.OK, contentTypes.png);
+   utils.getFile("public/images/poster_joker.jpg", res);
+  });
+
   /*
   router.post("/", (req, res) => {
    res.writeHead(httpStatus.OK, contentTypes.html);
    utils.getFile("views/thanks.html", res);
-  });
-  router.get("/graph.png", (req, res) => {
-   res.writeHead(httpStatus.OK, contentTypes.png);
-   utils.getFile("public/images/graph.png", res);
   });
   */
 
