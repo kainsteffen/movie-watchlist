@@ -1,0 +1,22 @@
+{
+  "name": "movie-watchlist",
+  "version": "1.0.0",
+  "description": "An app to track lists of movies.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kainsteffen/movie-watchlist.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kainsteffen/movie-watchlist/issues"
+  },
+  "homepage": "https://github.com/kainsteffen/movie-watchlist#readme",
+  "dependencies": {
+    "http-status-codes": "^1.4.0"
+  }
+}
