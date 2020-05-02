@@ -1,21 +1,13 @@
 {
-  "name": "movie-watchlist",
+  "name": "watchlist",
   "version": "1.0.0",
-  "description": "Franz First Try at node servers",
+  "description": "A site for creating watchlists\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;5D\u001b[1;g/following and looking at watchlists",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kainsteffen/movie-watchlist.git"
-  },
   "author": "Franz Lisdat",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kainsteffen/movie-watchlist/issues"
-  },
-  "homepage": "https://github.com/kainsteffen/movie-watchlist#readme",
   "dependencies": {
     "http-status-codes": "^1.4.0"
   }
