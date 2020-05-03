@@ -2,6 +2,7 @@ const dataBase = require("./public/js/mockData").mockData;
 
 const homeController = require("./controllers/homeController");
 const watchlistController = require("./controllers/watchlistsController");
+const movieController = require("./controllers/movieController");
 const errorController = require("./controllers/errorController");
 
 const layouts = require("express-ejs-layouts");
@@ -43,6 +44,8 @@ app.post("/", (req, res) => {
 app.get("/", (req, res) => homeController.getHomePage(req, res, dataBase));
 
 app.get("/watchlist/:watchlist", (req, res) => watchlistController.getWatchlist(req, res, dataBase));
+
+app.get("/watchlist/:watchlist/movie/:movie", (req, res) => movieController.getMovie(req, res, dataBase));
 
 // =============================================================
 // Post-Middleware
