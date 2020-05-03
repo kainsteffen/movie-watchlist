@@ -2,151 +2,281 @@ exports.mockData = {
     watchlists: {
         "fantasy-movies": {
             name: "Fantasy Movies",
-            movies: [
-                {
+            movies: {
+                1: {
                     name: "The Lord of the Rings: The Fellowship of the Ring",
-                    watched: false
+                    watched: false,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                2: {
                     name: "The Lord of the Rings: The Return of the King",
-                    watched: false
+                    watched: false,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                3: {
                     name: "The Lord of the Rings: The Two Towers",
-                    watched: false
+                    watched: false,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                4: {
                     name: "Harry Potter and the Prisoner of Azkaban",
-                    watched: false
+                    watched: false,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                5: {
                     name: "Chronicles of Narnia: Prince Caspian",
-                    watched: true
+                    watched: true,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                6: {
                     name: "The Chronicles of Narnia: The Lion, the Witch and the Wardrobe",
-                    watched: true
+                    watched: true,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                7: {
                     name: "The Hobbit: An Unexpected Journey",
-                    watched: true
+                    watched: true,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                8: {
                     name: "Dragon Heart",
-                    watched: true
+                    watched: true,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-            ]
+            }
+
+
         },
         "horror-movies": {
             name: "Horror  Movies",
-            movies: [
-                {
+            movies: {
+                1: {
                     name: "The Evil Dead",
-                    watched: false
+                    watched: false,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                2: {
                     name: "The Exorcist",
-                    watched: false
+                    watched: false,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                3: {
                     name: "The Shining",
-                    watched: false
+                    watched: false,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                4: {
                     name: "The Texas Chain Saw Massacre",
-                    watched: false
+                    watched: false,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                5: {
                     name: "Halloween",
-                    watched: true
+                    watched: true,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                5: {
                     name: "Alien",
-                    watched: true
+                    watched: true,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                6: {
                     name: "The Thing",
-                    watched: true
+                    watched: true,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                7: {
                     name: "A Nightmare on Elm Street",
-                    watched: true
+                    watched: true,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-            ]
+            }
         },
         "marvel-movies": {
             name: "Marvel  Movies",
-            movies: [
-                {
+            movies: {
+                1: {
                     name: "Avengers Endgame",
-                    watched: false
+                    watched: false,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                2: {
                     name: "Black Widow",
-                    watched: false
+                    watched: false,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                3: {
                     name: "Thor Love and Thunder",
-                    watched: false
+                    watched: false,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                4: {
                     name: "Black Panther",
-                    watched: true
+                    watched: true,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                5: {
                     name: "Thor Ragnaro",
-                    watched: true
+                    watched: true,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                6: {
                     name: "Spiderman Homecoming",
-                    watched: true
+                    watched: true,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                7: {
                     name: "Avengers Infinity War",
-                    watched: true
+                    watched: true,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                8: {
                     name: "Dr.Strange",
-                    watched: true
+                    watched: true,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-            ]
+            }
         },
         "top-250-movies": {
             name: "Top 250 Movies",
-            movies: [
-                {
+            movies: {
+                1: {
                     name: "Fight Club",
-                    watched: false
+                    watched: false,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                2: {
                     name: "The Dark Knight",
-                    watched: false
+                    watched: false,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                3: {
                     name: "Pulp Fiction",
-                    watched: false
+                    watched: false,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                4: {
                     name: "Schindler's List",
-                    watched: false
+                    watched: false,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                5: {
                     name: "12 Angry Men",
-                    watched: false
+                    watched: false,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                6: {
                     name: "Inception",
-                    watched: false
+                    watched: false,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                7: {
                     name: "The Shawshank Redemption",
-                    watched: true
+                    watched: true,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-                {
+                8: {
                     name: "The Godfather",
-                    watched: true
+                    watched: true,
+                    duration: "1h 30m",
+                    director: "James Cameron",
+                    actors: "Leonardo DiCaprio",
+                    description: "A very cool movie.",
                 },
-            ]
+            }
         }
     }
 }
