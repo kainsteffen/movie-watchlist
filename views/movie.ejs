@@ -1,0 +1,9 @@
+<h1><%= movie.name %></h1>
+
+<% Object.entries(movie).forEach(([key, value]) => {%>
+    <% if(key !== "name") { %>
+        <h2><%= key %></h2>
+        <p><%= value %></p>
+    <% } %>
+
+<% }) %>
