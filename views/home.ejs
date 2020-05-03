@@ -1,0 +1,7 @@
+<h1>My Watchlists</h1>
+<ul>
+    <% Object.entries(watchlists).forEach(([id, watchlist]) => {%>
+    <li><a href=<%= "watchlist/" + id %>><%= watchlist.name %></a></li>
+    <% }); %>
+</ul>
+
