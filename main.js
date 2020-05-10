@@ -3,8 +3,7 @@ const express = require("express"),
   app = express(),
   homeController = require("./controllers/homeController"),
   errorController = require("./controllers/errorController"),
-  subscribersController = require("./controllers/subscribersController"),
-  createNewWatchlistController = require("./controllers/subscribersController"),
+  createNewWatchlistController = require("./controllers/createNewWatchlistController"),
 layouts = require("express-ejs-layouts");
 
 // Mongoose stuff-------------------
@@ -23,11 +22,6 @@ db.once('open', function() {
 });
 
 mongoose.Promise = global.Promise
-// Subscriber stuff ---------------------------------
-
- app.get("/subscribers", subscribersController.getAllSubscribers);
- app.get("/contact", subscribersController.getSubscriptionPage);
- app.post("/subscribe", subscribersController.saveSubscriber);
 
  //  Express stuff ---------------------------------
 
@@ -54,12 +48,10 @@ app.get("/myWatchlist", homeController.showMyWatchlist);
 
 
 app.get("/createNewWatchlist", homeController.showCreateNewWatchlist);
-//app.get("/myPersonalWatchlists", createNewWatchlistController.getAllPersonalWatchlists);
-//app.post("/saveNewWatchlist", createNewWatchlistController.saveNewWatchlist);
+app.get("/myPersonalWatchlists", createNewWatchlistController.getAllPersonalWatchlists);
+app.post("/saveNewWatchlist", createNewWatchlistController.saveNewWatchlist);
 
 
-app.get("/contact", homeController.showSignUp);
-app.post("/contact", homeController.postedSignUpForm);
 
 
 

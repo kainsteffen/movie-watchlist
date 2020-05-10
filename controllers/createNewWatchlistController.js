@@ -1,11 +1,11 @@
-const NewWatchlist = require("../models/createNewWatchlist");
+const Watchlist = require("../models/createNewWatchlist");
 
 exports.getAllPersonalWatchlists = (req, res) => {
-  NewWatchlist.find({})
+  Watchlist.find({})
   .exec()
   .then((myPersonalWatchlists) => {
     res.render("myPersonalWatchlists", {
-      newWatchlist: newWatchlist
+      myPersonalWatchlists: myPersonalWatchlists
     });
   })
   .catch((error) => {
@@ -22,7 +22,7 @@ exports.getNewWatchlistPage = (req, res) => {
 };
 
 exports.saveNewWatchlist = (req, res) => {
-  let newWatchlist = new WatchList( {
+  let newWatchlist = new Watchlist( {
     name: req.body.watchlistName,
     genre: req.body.genre,
     intendedAudience: req.body.intendedAudience
