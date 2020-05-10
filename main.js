@@ -1,49 +1,72 @@
-const port = 3000,
- http = require("http"),
- httpStatus = require("http-status-codes"),
- router = require("./router"),
- contentTypes = require("./contentTypes"),
- utils = require("./utils");
- router.get("/", (req, res) => {
-  res.writeHead(httpStatus.OK, contentTypes.htm);
-  utils.getFile("views/index.html", res);
- });
- router.get("/myWatchlist.html", (req, res) => {
-  res.writeHead(httpStatus.OK, contentTypes.html);
-  utils.getFile("views/myWatchlist.html", res);
- });
- // router.get("/contact.html", (req, res) => {
- // res.writeHead(httpStatus.OK, contentTypes.html);
- // utils.getFile("views/contact.html", res);
- // });
- // router.post("/", (req, res) => {
- // res.writeHead(httpStatus.OK, contentTypes.html);
- // utils.getFile("views/thanks.html", res);
- // });
- router.get("/Witcher.jpg", (req, res) => {
- res.writeHead(httpStatus.OK, contentTypes.jpg);
- utils.getFile("public/images/Witcher.jpg", res);
- });
- router.get("/LotR.jpg", (req, res) => {
- res.writeHead(httpStatus.OK, contentTypes.jpg);
- utils.getFile("public/images/LotR.jpg", res);
- });
- router.get("/warcraft.jpg", (req, res) => {
- res.writeHead(httpStatus.OK, contentTypes.jpg);
- utils.getFile("public/images/warcraft.jpg", res);
- });
- router.get("/watchlist.css", (req, res) => {
- res.writeHead(httpStatus.OK, contentTypes.css);
- utils.getFile("public/css/watchlist.css", res);
- });
- router.get("/bootstrap.css", (req, res) => {
- res.writeHead(httpStatus.OK, contentTypes.css);
- utils.getFile("public/css/bootstrap.css", res);
- });
- router.get("/watchlist.js", (req, res) => {
- res.writeHead(httpStatus.OK, contentTypes.js);
- utils.getFile("public/js/watchlist.js", res);
- });
- http.createServer(router.handle).listen(port);
- console.log(`The server is listening on
- ➥ port number: ${port}`);
+// Constants ---------------------------------
+const express = require("express"),
+  app = express(),
+  homeController = require("./controllers/homeController"),
+  errorController = require("./controllers/errorController"),
+  subscribersController = require("./controllers/subscribersController"),
+  createNewWatchlistController = require("./controllers/subscribersController"),
+layouts = require("express-ejs-layouts");
+
+// Mongoose stuff-------------------
+  const mongoose = require("mongoose");
+mongoose.connect(
+ "mongodb://localhost:27017/myWatchlist_DB_1",
+ {useNewUrlParser: true}
+);
+
+// check if connection is there
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  // we're connected!
+  console.log("Connected to the database.");
+});
+
+mongoose.Promise = global.Promise
+// Subscriber stuff ---------------------------------
+
+ app.get("/subscribers", subscribersController.getAllSubscribers);
+ app.get("/contact", subscribersController.getSubscriptionPage);
+ app.post("/subscribe", subscribersController.saveSubscriber);
+
+ //  Express stuff ---------------------------------
+
+ mongoose.set("useCreateIndex", true);
+ app.set("view engine", "ejs");
+ app.set("port", process.env.PORT || 3000);
+ app.use(
+   express.urlencoded({
+     extended: false
+   })
+ );
+app.use(express.json());
+// use the layout.ejs for all HTML Sites
+app.use(layouts);
+app.use(express.static("public"));
+
+// Index is the default page ---------------------------------------
+app.get("/", (req, res) => {
+  res.render("index");
+});
+
+// Routers ------------------------------------------------
+app.get("/myWatchlist", homeController.showMyWatchlist);
+
+
+app.get("/createNewWatchlist", homeController.showCreateNewWatchlist);
+app.get("/myPersonalWatchlists", createNewWatchlistController.getAllPersonalWatchlists);
+app.post("/saveNewWatchlist", createNewWatchlistController.saveNewWatchlist);
+
+
+app.get("/contact", homeController.showSignUp);
+app.post("/contact", homeController.postedSignUpForm);
+
+
+
+// Error Handling --------------------------------
+app.use(errorController.pageNotFoundError);
+app.use(errorController.internalServerError);
+
+app.listen(app.get("port"), () => {
+  console.log(`Server running at http://localhost:${app.get("port")}`);
+});
