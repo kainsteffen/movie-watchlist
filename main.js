@@ -54,8 +54,8 @@ app.get("/myWatchlist", homeController.showMyWatchlist);
 
 
 app.get("/createNewWatchlist", homeController.showCreateNewWatchlist);
-app.get("/myPersonalWatchlists", createNewWatchlistController.getAllPersonalWatchlists);
-app.post("/saveNewWatchlist", createNewWatchlistController.saveNewWatchlist);
+//app.get("/myPersonalWatchlists", createNewWatchlistController.getAllPersonalWatchlists);
+//app.post("/saveNewWatchlist", createNewWatchlistController.saveNewWatchlist);
 
 
 app.get("/contact", homeController.showSignUp);
