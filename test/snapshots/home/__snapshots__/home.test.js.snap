@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders home correctly 1`] = `
+"<body>
+    <div id=\\"nav\\">NAVIGATION</div>
+<a href=\\"/\\">Back To Home</a>
+    <h1>My Watchlists</h1>
+<ul>
+    
+</ul>
+
+<form action=\\"/add-watchlist\\" method=\\"post\\">
+    <label for=\\"name\\">Name</label>
+    <input type=\\"text\\" name=\\"name\\" placeholder=\\"Best Fantasy Movies\\">
+    <label for=\\"name\\">Genre</label>
+    <input type=\\"text\\" name=\\"genre\\" placeholder=\\"Fantasy\\">
+    <label for=\\"name\\">Age Group</label>
+    <input type=\\"number\\" name=\\"intendedAudience\\" placeholder=\\"18\\">
+    <input type=\\"submit\\" name=\\"submit\\">
+</form>
+
+<form action=\\"/savefeedback\\" method=\\"post\\">
+    <p>Do you like our page?</p>
+    <input type=\\"text\\" name=\\"decision\\" pattern=(yes|no) placeholder=\\"yes or no\\">
+    <input type=\\"submit\\" name=\\"submit\\" value=\\"Submit\\"></input>
+</form>
+<a href=\\"feedback\\">See Results</a>
+
+
+    <div id=\\"footer\\">FOOTER</div>
+</body>"
+`;
