@@ -27,7 +27,7 @@
     <% movies.forEach((movie) => {%>
     <% console.log(watchlist.movies) %>
     <% if(movie.watched) {%>
-    <li><a href=<%= watchlist.name + "/movie/" %>><%= movie.name %></a></li>
+    <li><a href=<%= watchlist.name + "/movie/" + movie.name %>><%= movie.name %></a></li>
     <% } %>
     <% }) %>
 </ul>
