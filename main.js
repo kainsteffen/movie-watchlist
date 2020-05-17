@@ -1,15 +1,4 @@
 const mongoose = require("mongoose");
-mongoose.connect(
-    "mongodb://localhost:27017/movie_watchlist_db",
-    { useNewUrlParser: true }
-);
-mongoose.Promise
-    = global.Promise;
-const db = mongoose.connection;
-
-db.once("open", () => {
-    console.log("Successfully connected to MongoDB using Mongoose!");
-});
 
 const dataBase = require("./public/js/mockData").mockData;
 
@@ -27,6 +16,18 @@ const app = express();
 // =============================================================
 // Pre-Middleware
 // =============================================================
+
+// configure MongoDB
+mongoose.Promise = global.Promise;
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost:27017/movie_watchlist_db",
+  { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true}
+);
+const db = mongoose.connection;
+
+db.once("open", () => {
+    console.log("Successfully connected to MongoDB using Mongoose!");
+});
 
 // Set up global express variables
 app.set("port", process.env.PORT || 3000);
