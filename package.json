@@ -23,6 +23,15 @@
     "express-ejs-layouts": "^2.5.0",
     "http-status-codes": "^1.4.0",
     "mongodb": "^3.5.7",
-    "mongoose": "^5.9.13"
+    "mongoose": "^5.9.13",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.0.0",
+    "eslint-plugin-react": "^7.20.0",
+    "jest": "^26.0.1"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }

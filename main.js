@@ -7,7 +7,7 @@ const watchlistController = require("./controllers/watchlistsController");
 const movieController = require("./controllers/movieController");
 const errorController = require("./controllers/errorController");
 const feedbackController = require("./controllers/feedbackController");
-
+const morgan = require("morgan");
 const layouts = require("express-ejs-layouts");
 const express = require("express");
 
@@ -32,6 +32,9 @@ db.once("open", () => {
 // Set up global express variables
 app.set("port", process.env.PORT || 3000);
 app.set("view engine", "ejs")
+
+//
+app.use(morgan("combined"));
 // Configure app to use layouts modules.
 app.use(layouts);
 // Configure app to parse URL-encoded requests in JSON format
@@ -63,7 +66,7 @@ app.get("/watchlist/:watchlist", watchlistController.getWatchlist);
 app.get("/watchlist/:watchlist/movie/:movie", (req, res) => movieController.getMovie(req, res, dataBase));
 
 app.get("/feedback", feedbackController.getFeedback);
-
+debugger;
 app.post("/savefeedback", feedbackController.saveFeedback);
 
 app.post("/add-watchlist", watchlistController.createWatchlist)
