@@ -1,6 +1,7 @@
 const Feedback = require("../models/feedback");
 
-exports.getFeedback = (req, res) => {
+module.exports = {
+  getFeedback: (req, res) => {
     Feedback.find({})
         .exec()
         .then((feedback) => {
@@ -15,9 +16,8 @@ exports.getFeedback = (req, res) => {
         .then(() => {
             console.log("promise complete");
         });
-};
-
-exports.saveFeedback = (req, res) => {
+  },
+  saveFeedback: (req, res) => {
     let newFeedback = new Feedback({
         decision: req.body.decision
     });
@@ -28,4 +28,5 @@ exports.saveFeedback = (req, res) => {
         .catch(error => {
             res.send(error);
         });
+  }
 };

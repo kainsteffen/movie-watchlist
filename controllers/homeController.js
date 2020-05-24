@@ -1,10 +1,10 @@
 const Watchlist = require("../models/watchlist");
 
-exports.getHomePage = (req, res, db) => {
+module.exports = {
+  getHomePage: (req, res, db) => {
     res.render("home", { watchlists: db.watchlists })
-}
-
-exports.getAllWatchlists = (req, res) => {
+  },
+  getAllWatchlists: (req, res) => {
     Watchlist.find({})
         .exec().then((watchlists) => {
             res.render("home", { watchlists: watchlists })
@@ -15,4 +15,5 @@ exports.getAllWatchlists = (req, res) => {
         .then(() => {
             console.log("promise complete");
         });
-}
+      }
+};

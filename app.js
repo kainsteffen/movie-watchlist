@@ -5,6 +5,7 @@ const watchlistController = require("./controllers/watchlistsController");
 const movieController = require("./controllers/movieController");
 const errorController = require("./controllers/errorController");
 const feedbackController = require("./controllers/feedbackController");
+const usersController = require("./controllers/usersController");
 const morgan = require("morgan");
 const layouts = require("express-ejs-layouts");
 
@@ -40,12 +41,14 @@ app.post("/", (req, res) => {
 
 app.get("/", (req, res) => homeController.getAllWatchlists(req, res));
 
+app.get("/users", usersController.index, usersController.indexView)
+
 app.get("/watchlist/:watchlist", watchlistController.getWatchlist);
 
 app.get("/watchlist/:watchlist/movie/:movie", (req, res) => movieController.getMovie(req, res, dataBase));
 
 app.get("/feedback", feedbackController.getFeedback);
-debugger;
+
 app.post("/savefeedback", feedbackController.saveFeedback);
 
 app.post("/add-watchlist", watchlistController.createWatchlist)

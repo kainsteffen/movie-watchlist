@@ -1,6 +1,6 @@
+const mongoose = require("mongoose");
 
-const mongoose = require("mongoose"),
-    feedbackSchema = mongoose.Schema({
+const feedbackSchema = mongoose.Schema({
         decision: Boolean
     });
 

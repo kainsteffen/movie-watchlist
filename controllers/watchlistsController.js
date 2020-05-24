@@ -5,16 +5,16 @@
 const Watchlist = require("../models/watchlist");
 const Movie = require("../models/movie");
 
-exports.getWatchlist = (req, res) => {
+module.exports = {
+  getWatchlist: (req, res) => {
     Watchlist.findOne({ name: req.params.watchlist }).exec((error, data) => {
         if (data) {
             console.log(data);
             res.render("watchlist", { watchlist: data, movies: data.movies });
         }
     })
-}
-
-exports.createWatchlist = (req, res) => {
+  },
+  createWatchlist: (req, res) => {
     let newWatchlist = new Watchlist({
         name: req.body.name,
         genre: req.body.genre,
@@ -23,11 +23,11 @@ exports.createWatchlist = (req, res) => {
 
     newWatchlist.save().then(() => {
         res.render("add-confirmation");
-    }).catch(error => { 
+    }).catch(error => {
         res.send(error);
      });
-}
-exports.addMovie = (req, res) => {
+  },
+  addMovie: (req, res) => {
     Watchlist.findOne({ name: req.params.watchlist }).exec((error, data) => {
         if (data) {
             console.log(data);
@@ -42,4 +42,5 @@ exports.addMovie = (req, res) => {
             });
         }
     })
-}
+  }
+};
