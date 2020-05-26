@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+const router = express.Router();
+
 const homeController = require("./controllers/homeController");
 const watchlistController = require("./controllers/watchlistsController");
 const movieController = require("./controllers/movieController");
@@ -17,6 +19,7 @@ app.set("view engine", "ejs")
 app.use(morgan("combined"));
 // Configure app to use layouts modules.
 app.use(layouts);
+app.use("/", router);
 // Configure app to parse URL-encoded requests in JSON format
 app.use(
     express.urlencoded({
@@ -42,6 +45,9 @@ app.post("/", (req, res) => {
 app.get("/", (req, res) => homeController.getAllWatchlists(req, res));
 
 app.get("/users", usersController.index, usersController.indexView)
+app.get("/users/new", usersController.new);
+app.post("/users/create", usersController.create, usersController.redirectView);
+app.get("/users/:id", usersController.show, usersController.showView);
 
 app.get("/watchlist/:watchlist", watchlistController.getWatchlist);
 
