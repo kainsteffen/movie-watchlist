@@ -10,6 +10,7 @@ const feedbackController = require("./controllers/feedbackController");
 const usersController = require("./controllers/usersController");
 const morgan = require("morgan");
 const layouts = require("express-ejs-layouts");
+const methodOverride = require("method-override");
 
 // Set up global express variables
 app.set("port", process.env.PORT || 3000);
@@ -26,6 +27,11 @@ app.use(
         extended: false
     })
 );
+
+app.use(methodOverride("_method", {
+ methods: ["POST", "GET"]
+}));
+
 app.use(express.json());
 // Configure app to use corresponding "public" folder
 // and serve its content as static files. (URL addressable)
@@ -47,6 +53,9 @@ app.get("/", (req, res) => homeController.getAllWatchlists(req, res));
 app.get("/users", usersController.index, usersController.indexView)
 app.get("/users/new", usersController.new);
 app.post("/users/create", usersController.create, usersController.redirectView);
+app.get("/users/:id/edit", usersController.edit);
+app.put("/users/:id/update", usersController.update, usersController.redirectView);
+app.delete("/users/:id/delete", usersController.delete, usersController.redirectView);
 app.get("/users/:id", usersController.show, usersController.showView);
 
 app.get("/watchlist/:watchlist", watchlistController.getWatchlist);
