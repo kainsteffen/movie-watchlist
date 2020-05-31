@@ -18,11 +18,6 @@ const mongoose = require("mongoose"),
         lowercase: true,
         unique: true
       },
-      zipCode: {
-        type: Number,
-        min: [1000, "Zip code too short"],
-        max: 99999
-      },
       password: {
         type: String,
         required: true
@@ -33,7 +28,7 @@ const mongoose = require("mongoose"),
     }
   );
 
-userSchema.virtual("fullName").get(function() {
+userSchema.virtual("fullName").get(function () {
   return `${this.name.first} ${this.name.last}`;
 });
 

@@ -29,7 +29,7 @@ app.use(
 );
 
 app.use(methodOverride("_method", {
- methods: ["POST", "GET"]
+    methods: ["POST", "GET"]
 }));
 
 app.use(express.json());
@@ -58,17 +58,19 @@ app.put("/users/:id/update", usersController.update, usersController.redirectVie
 app.delete("/users/:id/delete", usersController.delete, usersController.redirectView);
 app.get("/users/:id", usersController.show, usersController.showView);
 
-app.get("/watchlist/:watchlist", watchlistController.getWatchlist);
+app.get("/watchlist/:watchlist", watchlistController.showWatchlists);
 
 app.get("/watchlist/:watchlist/movie/:movie", (req, res) => movieController.getMovie(req, res, dataBase));
 
 app.get("/feedback", feedbackController.getFeedback);
 
+app.post("/watchlist/:watchlist/search-movie", watchlistController.searchMovie);
+
 app.post("/savefeedback", feedbackController.saveFeedback);
 
-app.post("/add-watchlist", watchlistController.createWatchlist)
+app.post("/add-watchlist", watchlistController.createWatchlist);
 
-app.post("/watchlist/:watchlist/add-movie", watchlistController.addMovie)
+app.post("/watchlist/:watchlist/add-movie", watchlistController.addMovie);
 
 app.use(errorController.respondNoResourceFound);
 app.use(errorController.respondInternalError);

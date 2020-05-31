@@ -1,17 +1,14 @@
 <h1>My Watchlists</h1>
 <ul>
     <% Object.entries(watchlists).forEach(([id, watchlist]) => {%>
-    <li><a href=<%= "watchlist/" + watchlist.name %>><%= watchlist.name %></a></li>
+    <li><a href=<%= "watchlist/" + watchlist._id %>><%= watchlist.name %></a></li>
     <% }); %>
 </ul>
 
+<h2>Add Watchlist</h2>
 <form action="/add-watchlist" method="post">
     <label for="name">Name</label>
-    <input type="text" name="name" placeholder="Best Fantasy Movies">
-    <label for="name">Genre</label>
-    <input type="text" name="genre" placeholder="Fantasy">
-    <label for="name">Age Group</label>
-    <input type="number" name="intendedAudience" placeholder="18">
+    <input type="text" name="name" placeholder="Name">
     <input type="submit" name="submit">
 </form>
 
@@ -21,4 +18,3 @@
     <input type="submit" name="submit" value="Submit"></input>
 </form>
 <a href="feedback">See Results</a>
-
