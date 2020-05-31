@@ -1,6 +1,6 @@
 const { app, User, request, id } = require('../../commonJest')
 
-describe('user create',
+describe('user delete',
     function () {
         let userData = {
             name: {

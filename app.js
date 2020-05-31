@@ -6,7 +6,6 @@ const homeController = require("./controllers/homeController");
 const watchlistController = require("./controllers/watchlistController");
 const movieController = require("./controllers/movieController");
 const errorController = require("./controllers/errorController");
-const feedbackController = require("./controllers/feedbackController");
 const usersController = require("./controllers/usersController");
 const morgan = require("morgan");
 const layouts = require("express-ejs-layouts");
@@ -48,7 +47,7 @@ app.post("/", (req, res) => {
     res.send("POST Successful!");
 });
 
-app.get("/", (req, res) => homeController.getAllWatchlists(req, res));
+app.get("/", (req, res) => homeController.showAllWatchlists(req, res));
 
 app.get("/users", usersController.index, usersController.indexView)
 app.get("/users/new", usersController.new);
@@ -65,20 +64,9 @@ app.get("/watchlist/:id/edit", watchlistController.edit);
 app.put("/watchlist/:id/update", watchlistController.update, watchlistController.redirectView);
 app.delete("/watchlist/:id/delete", watchlistController.delete, watchlistController.redirectView);
 app.get("/watchlist/:id", watchlistController.show, watchlistController.showView);
-
-// app.get("/watchlist/:watchlist", watchlistController.showWatchlists);
-
 app.get("/watchlist/:id/movie/:movie", (req, res) => movieController.getMovie(req, res, dataBase));
-
-app.get("/feedback", feedbackController.getFeedback);
-
 app.post("/watchlist/:id/search-movie", watchlistController.searchMovie);
-
-app.post("/savefeedback", feedbackController.saveFeedback);
-
-// app.post("/add-watchlist", watchlistController.createWatchlist);
-
-app.post("/watchlist/:watchlist/add-movie", watchlistController.addMovie);
+app.post("/watchlist/:id/add-movie", watchlistController.addMovie, watchlistController.redirectView);
 
 app.use(errorController.respondNoResourceFound);
 app.use(errorController.respondInternalError);

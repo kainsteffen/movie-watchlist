@@ -1,5 +1,11 @@
 <h1><%= watchlist.name %></h1>
 
+<h2>Search for Movie to add</h2>
+<form action=<%= watchlist._id + "/search-movie" %> method="post">
+    <input type="text" name="searchTerm" placeholder="Search Movie">
+    <input type="submit" name="submit">
+</form>
+
 <h2>Movies Left:</h2>
 <ul>
     <% movies.forEach((movie) => {%>
@@ -19,9 +25,3 @@
     <% } %>
     <% }) %>
 </ul>
-
-<h2>Search for Movie to add</h2>
-<form action=<%= watchlist._id + "/search-movie" %> method="post">
-    <input type="text" name="searchTerm" placeholder="Search Movie">
-    <input type="submit" name="submit">
-</form>
