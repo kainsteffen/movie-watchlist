@@ -1,23 +1,17 @@
 <h1><%= watchlist.name %></h1>
 
-<p>Genre: <%= watchlist.genre %></p>
-<p>Intended Audience: <%= watchlist.intendedAudience %></p>
-
-<h2>Next Movie To Watch:</h2>
-
-<% const nextMovie = Object.values(watchlist.movies).find(movie => !movie.watched) %>
-<% if(nextMovie !== undefined) {%>
-    <% let url = watchlist.name + "/movie/" %>
-    <p><a href=<%= url %>><%= nextMovie.name %></a></p>
-<% } else {%>
-    <p>None</p>
-<% }%>
+<h2>Search for Movie to add</h2>
+<form action=<%= watchlist._id + "/search-movie" %> method="post">
+    <input type="text" name="searchTerm" placeholder="Search Movie">
+    <input type="submit" name="submit">
+</form>
 
 <h2>Movies Left:</h2>
 <ul>
     <% movies.forEach((movie) => {%>
     <% if(!movie.watched) {%>
-    <li><a href=<%= watchlist.name + "/movie/" + id %>><%= movie.name %></a></li>
+    <img src=<%= movie.data.Poster %> alt="Movie Poster" height="200">
+    <li><a href=<%= watchlist._id + "/movie/" + movie.data.Title  %>><%= movie.data.Title %></a></li>
     <% } %>
     <% }) %>
 </ul>
@@ -27,12 +21,7 @@
     <% movies.forEach((movie) => {%>
     <% console.log(watchlist.movies) %>
     <% if(movie.watched) {%>
-    <li><a href=<%= watchlist.name + "/movie/" + movie.name %>><%= movie.name %></a></li>
+    <li><a href=<%= watchlist._id + "/movie/" + movie.data.Title %>><%= movie.data.Title %></a></li>
     <% } %>
     <% }) %>
 </ul>
-
-<form action=<%= watchlist.name + "/add-movie" %> method="post">
-    <input type="text" name="name" placeholder="Name">
-    <input type="submit" name="submit">
-</form>
