@@ -12,6 +12,40 @@ module.exports = {
             }
         })
     },
+    index: (req, res, next) => {
+      Watchlist.find()
+        .then(watchlist => {
+          res.locals.watchlist = watchlist;
+          next();
+        })
+        .catch(error => {
+          console.log(`Error fetching watchlist: ${error.message}`);
+          next(error);
+        });
+    },
+    indexView: (req, res) => {
+      res.render("watchlist/index");
+    },
+    new: (req, res) => {
+      res.render("watchlist/new");
+    },
+    show: (req, res, next) => {
+      let watchlistId = req.params.id;
+      Watchlist.findById(watchlistId)
+      .populate("movies").exec()
+      .then(watchlist => {
+        res.locals.watchlist = watchlist;
+        res.locals.movies = watchlist.movies;
+        next();
+      })
+      .catch(error => {
+        console.log(`Error fetching watchlist by ID: ${error.message}`);
+        next(error);
+      });
+    },
+    showView: (req, res) => {
+      res.render("watchlist/show");
+    },
     createWatchlist: (req, res) => {
         let newWatchlist = new Watchlist({
             name: req.body.name,
@@ -46,7 +80,7 @@ module.exports = {
             // The whole response has been received. Print out the result.
             result.on('end', () => {
                 let searchResults = JSON.parse(data);
-                res.render("movie-search-results", { watchlist: req.params.watchlist, searchResults: searchResults });
+                res.render("movie-search-results", { watchlist: req.params.id, searchResults: searchResults });
             });
 
         }).on("error", (err) => {
@@ -75,7 +109,7 @@ module.exports = {
 
             // The whole response has been received. Print out the result.
             result.on('end', () => {
-                Watchlist.findOne({ _id: req.params.watchlist }).exec((error, watchlist) => {
+                Watchlist.findOne({ _id: req.params.id }).exec((error, watchlist) => {
                     if (watchlist) {
                         console.log(watchlist);
 
@@ -88,7 +122,7 @@ module.exports = {
                         newMovie.save().then(() => {
                             watchlist.movies.push(newMovie._id);
                             watchlist.save().then(() => {
-                                res.redirect("/watchlist/" + req.params.watchlist);
+                                res.redirect("/watchlist/" + req.params.id);
                             }).catch(error => {
                                 res.send(error);
                             });
@@ -100,5 +134,53 @@ module.exports = {
         }).on("error", (err) => {
             console.log("Error: " + err.message);
         });
+    },
+    edit: (req, res, next) => {
+      let watchlistId = req.params.id;
+      Watchlist.findById(watchlistId)
+        .then(watchlist => {
+          res.render("watchlist/edit", {
+            watchlist: watchlist
+          });
+        })
+        .catch(error => {
+          console.log(`Error fetching watchlist by ID: ${error.message}`);
+          next(error);
+        });
+    },
+    update: (req, res, next) => {
+      let watchlistId = req.params.id,
+        watchlistParams = {
+          name: req.body.name
+        };
+      Watchlist.findByIdAndUpdate(watchlistId, {
+        $set: watchlistParams
+      })
+        .then(watchlist => {
+          res.locals.redirect = `/watchlist/${watchlistId}`;
+          res.locals.watchlist = watchlist;
+          next();
+        })
+        .catch(error => {
+          console.log(`Error updating watchlist by ID: ${error.message}`);
+          next(error);
+        });
+    },
+    delete: (req, res, next) => {
+      let watchlistId = req.params.id;
+      Watchlist.findByIdAndRemove(watchlistId)
+        .then(() => {
+          res.locals.redirect = "/watchlist";
+          next();
+        })
+        .catch(error => {
+          console.log(`Error deleting watchlist by ID: ${error.message}`);
+          next();
+        });
+    },
+    redirectView: (req, res, next) => {
+      let redirectPath = res.locals.redirect;
+      if (redirectPath) res.redirect(redirectPath);
+      else next();
     }
 };

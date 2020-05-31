@@ -80,8 +80,7 @@ module.exports = {
           last: req.body.last
         },
         email: req.body.email,
-        password: req.body.password,
-        zipCode: req.body.zipCode
+        password: req.body.passwords
       };
     User.findByIdAndUpdate(userId, {
       $set: userParams

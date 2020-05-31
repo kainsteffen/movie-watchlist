@@ -4,7 +4,6 @@
     <tr>
       <th>Name</th>
       <th>Email</th>
-      <th>Zip Code</th>
       <th>Edit</th>
       <th>Delete</th>
     </tr>
@@ -19,9 +18,6 @@
       </td>
       <td>
         <%= user.email %>
-      </td>
-      <td>
-        <%= user.zipCode %>
       </td>
       <td>
         <a href="<%=`/users/${user._id}/edit`%>">
