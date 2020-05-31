@@ -9,6 +9,7 @@ const app = require('../app')
 const mongodbURI = process.env.MONGO_URL_USE_TEST || process.env.MONGO_URL
 
 const Watchlist = require('../models/watchlist')
+const User = require('../models/user')
 
 const mongoose = require('mongoose')
 beforeAll(() => {
@@ -29,17 +30,18 @@ afterAll(async () => {
   console.log('+++++ afterAll DB Close')
 })
 
-function id () {
+function id() {
   return (Math.ceil(Math.random() * 1000000)).toString()
 }
 
-function removeID (text, id) {
+function removeID(text, id) {
   const idRegExp = new RegExp(id, 'g')
   // expect(text).toMatch(idRegExp)
   return text.replace(idRegExp, '<replaced_mongoose_id>')
 }
 module.exports = {
   Watchlist: Watchlist,
+  User: User,
   app: app,
   request: request,
   supertest: request,
