@@ -1,0 +1,36 @@
+<h1>Watchlist:
+  <%= watchlist.name %>
+</h1>
+<table class="table">
+  <tr>
+    <th>Name</th>
+    <td>
+      <%= watchlist.name %>
+    </td>
+  </tr>
+  <tr>
+    <th>Genre</th>
+    <td>
+      <%= watchlist.genre %>
+    </td>
+  </tr>
+  <tr>
+    <th>Age Group</th>
+    <td>
+      <%= watchlist.intendedAudience %>
+    </td>
+  </tr>
+</table>
+
+<div class="center">
+  <a class="button" href="/watchlists">View all Watchlists</a>
+</div>
+
+<div>
+  <a class="button" href="<%=`/watchlists/${watchlist._id}/edit`%>">
+    Edit Watchlist
+  </a>
+</div>
+<div>
+  <a class="button" href="<%= `/watchlists/${watchlist._id}/delete?_method=DELETE` %>" onclick="return confirm('Are you sure you want to delete this Watchlist?')">Delete</a>
+</div>

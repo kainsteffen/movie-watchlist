@@ -1,0 +1,13 @@
+<div class="data-form">
+  <form class="form-signin" method="POST" action="<%=`/watchlists/${watchlist._id}/update?_method=PUT`%>">
+    <h2>Edit user:</h2>
+    <label for="inputName">Name</label>
+    <input type="text" name="name" id="inputName" class="form-control" value="<%= watchlist.name %>" placeholder="Best Fantasy Movies" autofocus>
+    <label for="inputGenre">Genre</label>
+    <input type="text" name="genre" id="inputGenre" class="form-control" value="<%= watchlist.genre %>" placeholder="Fantasy" required>
+    <label for="inputAge">Age Group</label>
+    <input type="number" name="intendedAudience" id="inputAge" class="form-control" value="<%= watchlist.intendedAudience %>" placeholder="18" required>
+    <br />
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Update</button>
+  </form>
+</div>

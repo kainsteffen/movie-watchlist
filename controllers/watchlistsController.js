@@ -14,33 +14,92 @@ module.exports = {
         }
     })
   },
-  createWatchlist: (req, res) => {
-    let newWatchlist = new Watchlist({
+  indexView: (req, res) => {
+    res.render("watchlists/index");
+  },
+  new: (req, res) => {
+    res.render("watchlists/new");
+  },
+  create: (req, res, next) => {
+    let watchlistParams = {
+      name: req.body.name,
+      genre: req.body.genre,
+      intendedAudience: req.body.intendedAudience,
+    };
+    Watchlist.create(watchlistParams)
+      .then(watchlist => {
+        res.locals.redirect = "/watchlists";
+        res.locals.watchlist = watchlist;
+        next();
+      })
+      .catch(error => {
+        console.log(`Error saving watchlist: ${error.message}`);
+        next(error);
+      });
+  },
+  redirectView: (req, res, next) => {
+    let redirectPath = res.locals.redirect;
+    if (redirectPath) res.redirect(redirectPath);
+    else next();
+  },
+  show: (req, res, next) => {
+    let watchlistId = req.params.id;
+    Watchlist.findById(watchlistId)
+    .then(watchlist => {
+      res.locals.watchlist = watchlist;
+      next();
+    })
+    .catch(error => {
+      console.log(`Error fetching watchlist by ID: ${error.message}`);
+      next(error);
+    });
+  },
+  showView: (req, res) => {
+    res.render("watchlists/show");
+  },
+  edit: (req, res, next) => {
+    let watchlistsId = req.params.id;
+    Watchlist.findById(watchlistId)
+      .then(watchlist => {
+        res.render("watchlists/edit", {
+          watchlist: watchlist
+        });
+      })
+      .catch(error => {
+        console.log(`Error fetching watchlist by ID: ${error.message}`);
+        next(error);
+      });
+  },
+  update: (req, res, next) => {
+    let watchlistId = req.params.id,
+      userParams = {
         name: req.body.name,
         genre: req.body.genre,
         intendedAudience: req.body.intendedAudience,
-    });
-
-    newWatchlist.save().then(() => {
-        res.render("add-confirmation");
-    }).catch(error => {
-        res.send(error);
-     });
-  },
-  addMovie: (req, res) => {
-    Watchlist.findOne({ name: req.params.watchlist }).exec((error, data) => {
-        if (data) {
-            console.log(data);
-            data.movies.push(new Movie({
-                name: req.body.name,
-                watched: true,
-            }));
-            data.save().then(() => {
-                res.render("add-confirmation");
-            }).catch(error => {
-                res.send(error);
-            });
-        }
+      };
+    Watchlist.findByIdAndUpdate(watchlistId, {
+      $set: watchlistParams
     })
+      .then(watchlist => {
+        res.locals.redirect = `/watchlists/${watchlistId}`;
+        res.locals.watchlist = watchlist;
+        next();
+      })
+      .catch(error => {
+        console.log(`Error updating watchlist by ID: ${error.message}`);
+        next(error);
+      });
+  },
+  delete: (req, res, next) => {
+    let watchlistId = req.params.id;
+    Watchlist.findByIdAndRemove(watchlistId)
+      .then(() => {
+        res.locals.redirect = "/watchlists";
+        next();
+      })
+      .catch(error => {
+        console.log(`Error deleting watchlist by ID: ${error.message}`);
+        next();
+      });
   }
 };
