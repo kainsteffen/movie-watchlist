@@ -4,7 +4,7 @@ const https = require('https');
 const url = require('url');
 
 module.exports = {
-  showWatchlists: (req, res) => {
+  showWatchlist: (req, res) => {
     Watchlist.findOne({ _id: req.params.watchlist }).populate("movies").exec((error, watchlist) => {
       if (watchlist) {
         console.log(watchlist);
@@ -13,9 +13,10 @@ module.exports = {
     })
   },
   index: (req, res, next) => {
+
     Watchlist.find()
       .then(watchlist => {
-        res.locals.watchlist = watchlist;
+        res.locals.watchlist = req.user.watchlists;
         next();
       })
       .catch(error => {
@@ -47,15 +48,23 @@ module.exports = {
     res.render("watchlist/show");
   },
   createWatchlist: (req, res) => {
-    let newWatchlist = new Watchlist({
-      name: req.body.name,
-    });
-
-    newWatchlist.save().then(() => {
-      res.redirect("/")
-    }).catch(error => {
-      res.send(error);
-    });
+    if (req.user) {
+      let newWatchlist = new Watchlist({
+        owner: req.user._id,
+        name: req.body.name,
+      });
+      newWatchlist.save().then(() => {
+        res.redirect("/");
+        next();
+      }).catch(error => {
+        res.redirect("/");
+        next(error);
+      });
+    } else {
+      req.flash("error", "You need to be logged in to add watchlist!");
+      res.locals.redirect = "/";
+      next();
+    }
   },
   searchMovie: (req, res) => {
     const requestUrl = url.format(
@@ -172,7 +181,7 @@ module.exports = {
     let watchlistId = req.params.id;
     Watchlist.findByIdAndRemove(watchlistId)
       .then(() => {
-        res.locals.redirect = "/watchlist";
+        res.locals.redirect = "/";
         next();
       })
       .catch(error => {
