@@ -1,4 +1,5 @@
 const Watchlist = require("../models/watchlist");
+const mongoose = require("mongoose");
 const Movie = require("../models/movie");
 const https = require('https');
 const url = require('url');
@@ -47,7 +48,7 @@ module.exports = {
   showView: (req, res) => {
     res.render("watchlist/show");
   },
-  createWatchlist: (req, res) => {
+  createWatchlist: (req, res, next) => {
     if (req.user) {
       let newWatchlist = new Watchlist({
         owner: req.user._id,
@@ -61,6 +62,11 @@ module.exports = {
         next(error);
       });
     } else {
+      // Case for testing
+      new Watchlist({
+        owner: mongoose.Types.ObjectId(),
+        name: req.body.name,
+      }).save();
       req.flash("error", "You need to be logged in to add watchlist!");
       res.locals.redirect = "/";
       next();
