@@ -2,6 +2,35 @@ const express = require("express");
 const app = express();
 const router = express.Router();
 
+const expressValidator = require('express-validator')
+
+const expressSession = require("express-session");
+const cookieParser = require("cookie-parser");
+const connectFlash = require("connect-flash");
+router.use(cookieParser("passcode"));
+router.use(expressSession({
+    secret: "passcode",
+    cookie: {
+        maxAge: 4000000
+    },
+    resave: false,
+    saveUninitialized: false
+}));
+router.use(connectFlash());
+
+// Middleware for user, password authenication 
+// and hashing
+const passport = require("passport");
+router.use(passport.initialize());
+router.use(passport.session());
+
+// Set up user model serialization and 
+// deserialization
+const User = require("./models/user");
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 const homeController = require("./controllers/homeController");
 const watchlistController = require("./controllers/watchlistController");
 const movieController = require("./controllers/movieController");
@@ -34,8 +63,20 @@ app.use(methodOverride("_method", {
 app.use(express.json());
 // Configure app to use corresponding "public" folder
 // and serve its content as static files. (URL addressable)
-app.use(express.static("public"))
+app.use(express.static("public"));
 
+// User Express Validator to validate response at the API level
+// Response must be parsed before validation i.e. this needs to be 
+// after express.urlencoded and express.json
+app.use(expressValidator());
+
+// Add flashMessage, loggeedIn, currentUser as local variable for every page.
+router.use((req, res, next) => {
+    res.locals.flashMessages = req.flash();
+    res.locals.loggedIn = req.isAuthenticated();
+    res.locals.currentUser = req.user;
+    next();
+});
 
 // =============================================================
 // Routes
@@ -49,9 +90,12 @@ app.post("/", (req, res) => {
 
 app.get("/", (req, res) => homeController.showAllWatchlists(req, res));
 
+app.get("/users/login", usersController.login);
+app.post("/users/login", usersController.authenticate);
+app.get("/users/logout", usersController.logout, usersController.redirectView)
 app.get("/users", usersController.index, usersController.indexView)
 app.get("/users/new", usersController.new);
-app.post("/users/create", usersController.create, usersController.redirectView);
+app.post("/users/create", usersController.validate, usersController.create, usersController.redirectView);
 app.get("/users/:id/edit", usersController.edit);
 app.put("/users/:id/update", usersController.update, usersController.redirectView);
 app.delete("/users/:id/delete", usersController.delete, usersController.redirectView);

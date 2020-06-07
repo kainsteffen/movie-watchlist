@@ -1,3 +1,8 @@
+const bcrypt = require("bcrypt");
+// Adds functions used by Passport.js
+// for serialization and storage
+const passportLocalMongoose = require("passport-local-mongoose");
+
 const mongoose = require("mongoose"),
   { Schema } = mongoose,
   userSchema = new Schema(
@@ -18,15 +23,6 @@ const mongoose = require("mongoose"),
         lowercase: true,
         unique: true
       },
-      zipCode: {
-        type: Number,
-        min: [1000, "Zip code too short"],
-        max: 99999
-      },
-      password: {
-        type: String,
-        required: true
-      }
     },
     {
       timestamps: true
@@ -37,5 +33,10 @@ userSchema.virtual("fullName").get(function () {
   return `${this.name.first} ${this.name.last}`;
 });
 
+// Specify the plugin to use "email" as 
+// login parameter (automatically takes care of password)
+userSchema.plugin(passportLocalMongoose, {
+  usernameField: "email"
+});
 
 module.exports = mongoose.model("User", userSchema);
