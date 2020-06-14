@@ -10,23 +10,34 @@
   </tr>
 </table>
 
+<button id="modal-button" type="button" data-toggle="modal" data-target="#myModal">Movies</button>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-body">
+    </div>
+    <div class="modal-footer">
+      <button type="button" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>
+
 <h2>Search for Movie to add</h2>
-<form action=<%=`/watchlist/${watchlist._id}` + "/search-movie" %> method="post">
+<form action=<%=`/watchlists/${watchlist._id}` + "/search-movie" %> method="post">
   <input type="text" name="searchTerm" placeholder="Search Movie">
   <input type="submit" name="submit">
 </form>
 
 <div class="center">
-  <a class="button" href="/watchlist">View all Watchlists</a>
+  <a class="button" href="/watchlists">View all Watchlists</a>
 </div>
 
 <div>
-  <a class="button" href="<%=`/watchlist/${watchlist._id}/edit`%>">
+  <a class="button" href="<%=`/watchlists/${watchlist._id}/edit`%>">
     Edit Watchlist
   </a>
 </div>
 <div>
-  <a class="button" href="<%= `/watchlist/${watchlist._id}/delete?_method=DELETE` %>"
+  <a class="button" href="<%= `/watchlists/${watchlist._id}/delete?_method=DELETE` %>"
     onclick="return confirm('Are you sure you want to delete this Watchlist?')">Delete</a>
 </div>
 
@@ -35,7 +46,7 @@
   <% movies.forEach((movie) => {%>
   <% if(!movie.watched) {%>
   <img src=<%= movie.data.Poster %> alt="Movie Poster" height="200">
-  <li><a href=<%=`/watchlist/${watchlist._id}`+ "/movie/" + movie.data.Title  %>><%= movie.data.Title %></a></li>
+  <li><a href=<%=`/watchlists/${watchlist._id}`+ "/movie/" + movie.data.Title  %>><%= movie.data.Title %></a></li>
   <% } %>
   <% }) %>
 </ul>
@@ -45,7 +56,7 @@
   <% movies.forEach((movie) => {%>
   <% console.log(watchlist.movies) %>
   <% if(movie.watched) {%>
-  <li><a href=<%=`/watchlist/${watchlist._id}`+ "/movie/" + movie.data.Title %>><%= movie.data.Title %></a></li>
+  <li><a href=<%=`/watchlists/${watchlist._id}`+ "/movie/" + movie.data.Title %>><%= movie.data.Title %></a></li>
   <% } %>
   <% }) %>
 </ul>

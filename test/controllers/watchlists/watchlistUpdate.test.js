@@ -10,7 +10,7 @@ describe('watchlist update',
             const watchlist = await Watchlist.create(watchlistData)
             const newName = 'Cooler Watchlist'
             request(app)
-                .put(`/watchlist/${watchlist.id}/update`)
+                .put(`/watchlists/${watchlist.id}/update`)
                 .send({ name: newName })
                 .then((res) => {
                     Watchlist.findById(watchlist.id)

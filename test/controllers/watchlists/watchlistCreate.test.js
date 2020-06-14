@@ -8,7 +8,7 @@ describe('watchlist create',
 
         it('creates a watchlist', async function (done) {
             request(app)
-                .post('/watchlist/create')
+                .post('/watchlists/create')
                 .send(watchlistData)
                 .then((res) => {
                     Watchlist.findOne({ name: watchlistData.name }).then(insertedRecord => {

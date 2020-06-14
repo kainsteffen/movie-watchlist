@@ -9,7 +9,7 @@ describe('watchlist read',
         it('reads a watchlist', async function (done) {
             const watchlist = await Watchlist.create(watchlistData)
             request(app)
-                .get('/watchlist/' + watchlist.id)
+                .get('/watchlists/' + watchlist.id)
                 .end((err, res) => {
                     if (err) {
                         done(err)
