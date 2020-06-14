@@ -7,7 +7,7 @@ $(document).ready(() => {
       data.watchlist.forEach(watchlist => {
         $(".modal-body").append(
           `<div>
-						<span class="course-title">
+						<span>
 							${watchlist.name}
 						</span>
 					</div>`

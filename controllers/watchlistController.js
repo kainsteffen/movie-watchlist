@@ -2,6 +2,7 @@ const Watchlist = require("../models/watchlist");
 const mongoose = require("mongoose");
 const Movie = require("../models/movie");
 const https = require('https');
+const httpStatus = require("http-status-codes");
 const url = require('url');
 
 module.exports = {
