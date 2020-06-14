@@ -32,7 +32,8 @@
     "mongoose": "^5.9.13",
     "morgan": "^1.10.0",
     "passport": "^0.4.1",
-    "passport-local-mongoose": "^6.0.1"
+    "passport-local-mongoose": "^6.0.1",
+    "rand-token": "^1.0.1"
   },
   "devDependencies": {
     "@shelf/jest-mongodb": "^1.1.5",

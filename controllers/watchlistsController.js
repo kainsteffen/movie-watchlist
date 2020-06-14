@@ -1,8 +1,9 @@
 const Watchlist = require("../models/watchlist");
 const mongoose = require("mongoose");
 const Movie = require("../models/movie");
-const https = require('https');
-const url = require('url');
+const https = require("https");
+const url = require("url");
+const httpStatus = require("http-status-codes");
 
 module.exports = {
   showWatchlist: (req, res) => {
@@ -17,7 +18,7 @@ module.exports = {
 
     Watchlist.find()
       .then(watchlist => {
-        res.locals.watchlist = req.user.watchlists;
+        res.locals.watchlists = watchlist;
         next();
       })
       .catch(error => {
@@ -137,7 +138,7 @@ module.exports = {
             newMovie.save().then(() => {
               watchlist.movies.push(newMovie._id);
               watchlist.save().then(() => {
-                res.locals.redirect = `/watchlist/${req.params.id}`;
+                res.locals.redirect = `/watchlists/${req.params.id}`;
                 next();
               }).catch(error => {
                 console.log(`Error adding movie: ${error.message}`);
@@ -174,7 +175,7 @@ module.exports = {
       $set: watchlistParams
     })
       .then(watchlist => {
-        res.locals.redirect = `/watchlist/${watchlistId}`;
+        res.locals.redirect = `/watchlists/${watchlistId}`;
         res.locals.watchlist = watchlist;
         next();
       })
@@ -199,5 +200,26 @@ module.exports = {
     let redirectPath = res.locals.redirect;
     if (redirectPath) res.redirect(redirectPath);
     else next();
-  }
+  },
+  respondJSON: (req, res) => {
+    res.json({
+      status: httpStatus.OK,
+      data: res.locals
+    });
+  },
+  errorJSON: (error, req, res, next) => {
+    let errorObject;
+    if (error) {
+      errorObject = {
+        status: httpStatus.INTERNAL_SERVER_ERROR,
+        message: error.message
+      };
+    } else {
+      errorObject = {
+        status: httpStatus.INTERNAL_SERVER_ERROR,
+        message: "Unknown Error."
+      };
+    }
+    res.json(errorObject);
+  },
 };

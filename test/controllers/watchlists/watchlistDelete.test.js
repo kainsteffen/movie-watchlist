@@ -9,7 +9,7 @@ describe('watchlist delete',
         it('deletes a watchlist', async done => {
             const watchlist = await Watchlist.create(watchlistData)
             request(app)
-                .delete(`/watchlist/${watchlist.id}/delete`)
+                .delete(`/watchlists/${watchlist.id}/delete`)
                 .then((res) => {
                     Watchlist.findOne({ name: watchlist.name }).then(result => {
                         expect(result).toBeNull()
