@@ -3,7 +3,9 @@ const router = require("express").Router(),
   watchlistRoutes = require("./watchlistRoutes"),
   errorRoutes = require("./errorRoutes"),
   homeRoutes = require("./homeRoutes");
+  apiRoutes = require("./apiRoutes");
 
+router.use("/api", apiRoutes);
 router.use("/watchlist", watchlistRoutes);
 router.use("/users", userRoutes);
 router.use("/", homeRoutes);
