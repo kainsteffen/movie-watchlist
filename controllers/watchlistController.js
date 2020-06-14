@@ -14,7 +14,6 @@ module.exports = {
     })
   },
   index: (req, res, next) => {
-
     Watchlist.find()
       .then(watchlist => {
         res.locals.watchlist = req.user.watchlists;
@@ -199,5 +198,26 @@ module.exports = {
     let redirectPath = res.locals.redirect;
     if (redirectPath) res.redirect(redirectPath);
     else next();
-  }
+  },
+  respondJSON: (req, res) => {
+    res.json({
+      status: httpStatus.OK,
+      data: res.locals
+    });
+  },
+  errorJSON: (error, req, res, next) => {
+    let errorObject;
+    if (error) {
+      errorObject = {
+        status: httpStatus.INTERNAL_SERVER_ERROR,
+        message: error.message
+      };
+    } else {
+      errorObject = {
+        status: httpStatus.OK,
+        message: "Unknown Error."
+      };
+    }
+    res.json(errorObject);
+  },
 };
