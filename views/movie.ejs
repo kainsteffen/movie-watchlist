@@ -1,9 +1,0 @@
-<h1><%= movie.data.Title %></h1>
-
-<% Object.entries(movie.data).forEach(([key, value]) => {%>
-<% if(key !== "name") { %>
-<h2><%= key %></h2>
-<p><%= value %></p>
-<% } %>
-
-<% }) %>
