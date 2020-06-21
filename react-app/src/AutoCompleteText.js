@@ -7,11 +7,15 @@ export default class AutoCompleteText extends React.Component {
           'David',
           'Damien',
           'Franz',
-          'Max'
+          'Max',
+          'Kain',
+          'Dustin',
+          'Moritz',
+          'Fabian'
         ];
         this.state = {
           suggestions: [],
-
+          text: ''
         }
       }
 
@@ -20,12 +24,17 @@ onTextChanged = (e) => {
 const value = e.target.value;
 let suggestions = [];
 if (value.length > 0){
-  const regex = new RegExp('${value}','i');
-  console.log({value});
-  const suggestions = this.items.sort().filter(v => regex.test(v));
-  console.log(suggestions);
+  const regex = new RegExp(`^${value}`,'i');
+   suggestions = this.items.sort().filter(v => regex.test(v));
 }
-this.setState(() => ({ suggestions}));
+this.setState(() => ({ suggestions,text:value}));
+}
+
+suggestionSelected (value){
+  this.setState(()=> ({
+    text: value,
+    suggestions: [],
+  }))
 }
 
 renderSuggestions (){
@@ -35,17 +44,16 @@ renderSuggestions (){
   }
   return (
     <ul>
-<li> Hello </li>
-      {suggestions.map((item) => <li>{item}</li>)}
-
+      {suggestions.map((item) => <li onClick={() => this.suggestionSelected(item)}>{item}</li>)}
     </ul>
   );
 }
 
-      render () {
+  render () {
+        const {text} = this.state;
         return (
           <div>
-          <input onChange={this.onTextChanged} type ="text"/>
+          <input value={text} onChange={this.onTextChanged} type ="text"/>
           {this.renderSuggestions()}
           </div>
         )
