@@ -4,6 +4,7 @@ const router = require("express").Router(),
 
 router.use(usersController.verifyToken);
 
+router.post("/watchlists/create", watchlistsController.apiCreate, watchlistsController.respondJSON);
 router.get("/watchlists", watchlistsController.index, watchlistsController.respondJSON);
 router.use(watchlistsController.errorJSON);
 
