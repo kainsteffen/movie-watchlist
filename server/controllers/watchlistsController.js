@@ -196,6 +196,17 @@ module.exports = {
         next();
       });
   },
+  apiCreate: (req, res, next) => {
+    let newWatchlist = new Watchlist({
+      owner: req.body.ownerId,
+      name: req.body.name,
+    });
+    newWatchlist.save().then(() => {
+      next();
+    }).catch(error => {
+      next(error);
+    });
+  },
   redirectView: (req, res, next) => {
     let redirectPath = res.locals.redirect;
     if (redirectPath) res.redirect(redirectPath);
